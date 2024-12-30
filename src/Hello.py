@@ -7,6 +7,10 @@ import os # Use file name only in log printouts
 
 
 # Hello.py
+# The decorator takes extends the behavior of another function
+# without changing the functions actual code.
+# It takes the function as input arg and
+# kwargs is a dictionary
 def log_decorator(func):
     def wrapper(*args, **kwargs):
         # 
@@ -24,16 +28,81 @@ def log_function():
     print(f"*** {inspect.currentframe().f_back.f_code.co_name} ***")
 @log_decorator
 def main():
-    log_function()
-    ##userInput = input("Enter your name: ")
-    ##print("Welcome ",userInput)
-    print("Python version",sys.version)
-    #print(__name__)
-    #tryIfFunction()
-    #strFunction()
-    boolFunction()
-    listFunction()
-    tupleFunction()
+    value="1"
+    while value != "0":
+        print("0.\t Exit")
+        print("1.\t Log")
+        print("2.\t User in")
+        print("3.\t Out")
+        print("4.\t Try if")
+        print("5.\t Str")
+        print("6.\t Bool")
+        print("7.\t List")
+        print("8.\t Tuple")
+        print("9.\t Dictionary")
+        print("10.\t Variadic args")
+        print("11.\t While")
+
+        value=input("Select function: ")
+        print(f"Selected {value}...")
+        match(value):
+            case "0":
+                print("Exit")
+            case "1":
+                log_function()
+            case "2":     
+                userInput = input("Enter your name: ")
+                print("Welcome ",userInput)
+                print("Python version",sys.version)
+            case "3":   
+                print(__name__)
+            case "4":    
+                tryIfFunction()
+            case "5":    
+                strFunction()
+            case "6":    
+                boolFunction()            
+            case "7":
+                listFunction()
+            case "8":
+                tupleFunction()
+            case "9": 
+                dictionaryFunction()
+            case "10":
+                varArgsFunction("First")
+                varArgsFunction("Second",10,11,12)
+                varArgsFunction("Second",10,11,12,key1="Val1",key2="val2",key3=3)
+            case "11":
+                whileFunction()
+            case _:
+                print("Default case")
+    
+@log_decorator
+def whileFunction():
+    i=0
+    while i < 10:
+      print(i)
+      i+=1
+    
+@log_decorator
+def dictionaryFunction():
+    myDict={
+        "Name": "Jocke",
+        "Surename": "Sällvin",
+        "Year": 1971
+    }
+    print(myDict)
+    print(f"{myDict["Name"]} was born in {myDict["Year"]}")
+    surename=myDict.get("Surename")
+    print(f"Cognome={surename}")
+    myDict["Surename"]="Andersson"
+    print(f"Cognome={myDict.get("Surename")}")
+    
+    
+def varArgsFunction(positional,*args, **kwargs):
+    print(f"Positional: {positional}")    
+    print(f"args: {args}")
+    print(f"kwargs: {kwargs}")
 
 @log_decorator
 def listFunction():
